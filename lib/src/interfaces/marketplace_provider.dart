@@ -1,4 +1,3 @@
-import '../models/nft.dart';
 import '../models/nft_listing.dart';
 import '../models/nft_offer.dart';
 import '../core/nft_types.dart';

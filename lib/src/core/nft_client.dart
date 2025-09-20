@@ -2,7 +2,6 @@ import '../interfaces/nft_provider.dart';
 import '../interfaces/wallet_provider.dart';
 import '../interfaces/marketplace_provider.dart';
 import '../providers/nft_provider_manager.dart';
-import '../core/nft_exceptions.dart';
 import '../core/nft_types.dart';
 
 /// Main client for NFT operations across multiple blockchains

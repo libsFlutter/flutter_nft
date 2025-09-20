@@ -12,20 +12,17 @@ abstract class NFTException implements Exception {
 
 /// Exception thrown when provider is not available or not initialized
 class NFTProviderNotAvailableException extends NFTException {
-  const NFTProviderNotAvailableException(String message, {String? code, dynamic originalError})
-      : super(message, code: code, originalError: originalError);
+  const NFTProviderNotAvailableException(super.message, {super.code, super.originalError});
 }
 
 /// Exception thrown when wallet is not connected
 class WalletNotConnectedException extends NFTException {
-  const WalletNotConnectedException(String message, {String? code, dynamic originalError})
-      : super(message, code: code, originalError: originalError);
+  const WalletNotConnectedException(super.message, {super.code, super.originalError});
 }
 
 /// Exception thrown when transaction fails
 class TransactionFailedException extends NFTException {
-  const TransactionFailedException(String message, {String? code, dynamic originalError})
-      : super(message, code: code, originalError: originalError);
+  const TransactionFailedException(super.message, {super.code, super.originalError});
 }
 
 /// Exception thrown when NFT operation fails
