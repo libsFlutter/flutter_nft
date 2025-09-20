@@ -30,24 +30,20 @@ class TransactionFailedException extends NFTException {
 
 /// Exception thrown when NFT operation fails
 class NFTOperationException extends NFTException {
-  const NFTOperationException(String message, {String? code, dynamic originalError})
-      : super(message, code: code, originalError: originalError);
+  const NFTOperationException(super.message, {super.code, super.originalError});
 }
 
 /// Exception thrown when marketplace operation fails
 class MarketplaceException extends NFTException {
-  const MarketplaceException(String message, {String? code, dynamic originalError})
-      : super(message, code: code, originalError: originalError);
+  const MarketplaceException(super.message, {super.code, super.originalError});
 }
 
 /// Exception thrown when network operation fails
 class NetworkException extends NFTException {
-  const NetworkException(String message, {String? code, dynamic originalError})
-      : super(message, code: code, originalError: originalError);
+  const NetworkException(super.message, {super.code, super.originalError});
 }
 
 /// Exception thrown when validation fails
 class ValidationException extends NFTException {
-  const ValidationException(String message, {String? code, dynamic originalError})
-      : super(message, code: code, originalError: originalError);
+  const ValidationException(super.message, {super.code, super.originalError});
 }

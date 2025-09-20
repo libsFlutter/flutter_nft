@@ -39,7 +39,7 @@ class NFTClient {
   }
 
   /// Get NFT provider for a specific network
-  NFTProvider getNFTProvider(BlockchainNetwork network) {
+  NFTProvider? getNFTProvider(BlockchainNetwork network) {
     final providerId = _defaultProviders[network];
     if (providerId != null) {
       final provider = _providerManager.getNFTProvider(providerId);
@@ -50,7 +50,7 @@ class NFTClient {
   }
 
   /// Get wallet provider for a specific network
-  WalletProvider getWalletProvider(BlockchainNetwork network) {
+  WalletProvider? getWalletProvider(BlockchainNetwork network) {
     final providerId = _defaultProviders[network];
     if (providerId != null) {
       final provider = _providerManager.getWalletProvider(providerId);
@@ -61,7 +61,7 @@ class NFTClient {
   }
 
   /// Get marketplace provider for a specific network
-  MarketplaceProvider getMarketplaceProvider(BlockchainNetwork network) {
+  MarketplaceProvider? getMarketplaceProvider(BlockchainNetwork network) {
     final providerId = _defaultProviders[network];
     if (providerId != null) {
       final provider = _providerManager.getMarketplaceProvider(providerId);
