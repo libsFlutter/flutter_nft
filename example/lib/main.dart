@@ -21,7 +21,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final NFTClient nftClient;
 
-  const MyApp({Key? key, required this.nftClient}) : super(key: key);
+  const MyApp({super.key, required this.nftClient});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
 class NFTExampleScreen extends StatefulWidget {
   final NFTClient nftClient;
 
-  const NFTExampleScreen({Key? key, required this.nftClient}) : super(key: key);
+  const NFTExampleScreen({super.key, required this.nftClient});
 
   @override
   State<NFTExampleScreen> createState() => _NFTExampleScreenState();

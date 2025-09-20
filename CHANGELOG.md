@@ -1,3 +1,11 @@
+## 1.2.0+3
+
+* Fixed widget test issues in example app
+* Improved super parameter usage for better code quality
+* Enhanced example app with better NFT client demonstration
+* Fixed linting issues and improved code consistency
+* Updated package for publishing to pub.dev
+
 ## 1.1.0+2
 
 * Updated package version for republishing
