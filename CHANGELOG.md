@@ -1,3 +1,9 @@
+## 1.1.0+2
+
+* Updated package version for republishing
+* Improved package stability and documentation
+* Enhanced provider management system
+
 ## 1.0.0+1
 
 * Initial release of flutter_nft package
