@@ -1,6 +1,6 @@
 name: flutter_nft
 description: A universal Flutter library for NFT operations across multiple blockchains
-version: 1.1.0+2
+version: 1.2.0+3
 homepage: https://github.com/libsFlutter/flutter_nft
 
 environment:
