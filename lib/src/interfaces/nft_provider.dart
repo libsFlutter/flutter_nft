@@ -31,6 +31,9 @@ abstract class NFTProvider {
   /// Get NFT by token ID and contract address
   Future<NFT?> getNFT(String tokenId, String contractAddress);
 
+  /// Get owned NFTs for a specific address (alias for getNFTsByOwner)
+  Future<List<NFT>> getOwnedNFTs(String address) => getNFTsByOwner(address);
+
   /// Get multiple NFTs by their IDs
   Future<List<NFT>> getNFTs(List<String> tokenIds, String contractAddress);
 

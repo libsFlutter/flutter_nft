@@ -23,6 +23,9 @@ abstract class WalletProvider {
   /// Current connected address
   String? get connectedAddress;
 
+  /// Get current address (alias for connectedAddress)
+  String? get address => connectedAddress;
+
   /// Initialize the provider
   Future<void> initialize();
 
