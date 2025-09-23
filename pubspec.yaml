@@ -4,24 +4,24 @@ version: 1.2.0+3
 homepage: https://github.com/libsFlutter/flutter_nft
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
-  flutter: ">=3.10.0"
+  sdk: '>=3.8.0 <4.0.0'
+  flutter: ">=3.24.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  http: ^1.1.0
+  http: ^1.5.0
   crypto: ^3.0.3
   convert: ^3.1.1
   equatable: ^2.0.5
-  json_annotation: ^4.8.1
+  json_annotation: ^4.9.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^6.0.0
   mockito: ^5.4.2
-  build_runner: ^2.4.7
-  json_serializable: ^6.7.1
+  build_runner: ^2.7.1
+  json_serializable: ^6.11.1
 
 flutter:
