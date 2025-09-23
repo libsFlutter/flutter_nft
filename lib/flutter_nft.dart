@@ -1,5 +1,5 @@
 /// A universal Flutter library for NFT operations across multiple blockchains
-/// 
+///
 /// This library provides a unified interface for working with NFTs across
 /// different blockchain networks through pluggable providers.
 
