@@ -39,37 +39,43 @@ class NFTClient {
 
   /// Get NFT provider for a specific network
   NFTProvider? getNFTProvider(dynamic network) {
-    final blockchainNetwork = network is BlockchainNetwork ? network : BlockchainNetwork.ethereum;
+    final blockchainNetwork = network is BlockchainNetwork
+        ? network
+        : BlockchainNetwork.ethereum;
     final providerId = _defaultProviders[blockchainNetwork];
     if (providerId != null) {
       final provider = _providerManager.getNFTProvider(providerId);
       if (provider != null) return provider;
     }
-    
+
     return _providerManager.getNFTProviderByNetwork(blockchainNetwork);
   }
 
   /// Get wallet provider for a specific network
   WalletProvider? getWalletProvider(dynamic network) {
-    final blockchainNetwork = network is BlockchainNetwork ? network : BlockchainNetwork.ethereum;
+    final blockchainNetwork = network is BlockchainNetwork
+        ? network
+        : BlockchainNetwork.ethereum;
     final providerId = _defaultProviders[blockchainNetwork];
     if (providerId != null) {
       final provider = _providerManager.getWalletProvider(providerId);
       if (provider != null) return provider;
     }
-    
+
     return _providerManager.getWalletProviderByNetwork(blockchainNetwork);
   }
 
   /// Get marketplace provider for a specific network
   MarketplaceProvider? getMarketplaceProvider(dynamic network) {
-    final blockchainNetwork = network is BlockchainNetwork ? network : BlockchainNetwork.ethereum;
+    final blockchainNetwork = network is BlockchainNetwork
+        ? network
+        : BlockchainNetwork.ethereum;
     final providerId = _defaultProviders[blockchainNetwork];
     if (providerId != null) {
       final provider = _providerManager.getMarketplaceProvider(providerId);
       if (provider != null) return provider;
     }
-    
+
     return _providerManager.getMarketplaceProviderByNetwork(blockchainNetwork);
   }
 

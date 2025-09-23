@@ -29,16 +29,12 @@ abstract class MarketplaceProvider {
   Future<List<NFTListing>> getActiveListings({
     String? contractAddress,
     String? sellerAddress,
-    int? limit,
-    int? offset,
-  });
-
-  /// Get active listings with filters
-  Future<List<NFTListing>> getActiveListings({
     String? collectionId,
     double? minPrice,
     double? maxPrice,
     String? currency,
+    int? limit,
+    int? offset,
   });
 
   /// Get user's listings
@@ -55,16 +51,8 @@ abstract class MarketplaceProvider {
     required String currency,
     required String sellerAddress,
     int? expirationDays,
-    Map<String, dynamic>? additionalParams,
-  });
-
-  /// Create a new listing with duration in days
-  Future<NFTListing> createListing({
-    required String tokenId,
-    required double price,
-    required String currency,
-    required String sellerAddress,
     int? durationDays,
+    Map<String, dynamic>? additionalParams,
   });
 
   /// Cancel a listing
@@ -74,14 +62,8 @@ abstract class MarketplaceProvider {
   Future<String> buyNFT({
     required String listingId,
     required String buyerAddress,
-    Map<String, dynamic>? additionalParams,
-  });
-
-  /// Buy an NFT from a listing with price
-  Future<bool> buyNFT({
-    required String listingId,
-    required String buyerAddress,
     double? price,
+    Map<String, dynamic>? additionalParams,
   });
 
   /// Get active offers

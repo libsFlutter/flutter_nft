@@ -2,7 +2,6 @@
 /// 
 /// This library provides a unified interface for working with NFTs across
 /// different blockchain networks through pluggable providers.
-library flutter_nft;
 
 // Core exports
 export 'src/core/nft_client.dart';
