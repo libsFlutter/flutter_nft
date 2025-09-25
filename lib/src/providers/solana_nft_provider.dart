@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_yuku/flutter_yuku.dart';
-import '../core/nft_types.dart';
 import '../core/nft_exceptions.dart';
 
 /// Real Solana NFT Provider implementation

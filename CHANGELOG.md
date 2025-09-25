@@ -1,3 +1,12 @@
+## 1.3.0
+
+* Fixed dependencies for package publishing
+* Added missing dependencies: equatable, json_annotation, crypto, http, shared_preferences
+* Replaced path dependency with hosted flutter_yuku package
+* Fixed analysis errors in nft_client.dart and nft_utils.dart
+* Improved error handling in provider manager methods
+* Enhanced code formatting and linting compliance
+
 ## 1.2.0+3
 
 * Fixed widget test issues in example app

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter_yuku/flutter_yuku.dart';
 import '../core/nft_exceptions.dart';
-import '../core/nft_types.dart';
 
 /// Manages NFT providers across different blockchains
 class NFTProviderManager {
@@ -84,7 +83,9 @@ class NFTProviderManager {
   }
 
   /// Get marketplace provider by network
-  MarketplaceProvider? getMarketplaceProviderByNetwork(BlockchainNetwork network) {
+  MarketplaceProvider? getMarketplaceProviderByNetwork(
+    BlockchainNetwork network,
+  ) {
     try {
       return _marketplaceProviders.values.firstWhere(
         (provider) => provider.network == network,
@@ -111,17 +112,23 @@ class NFTProviderManager {
 
   /// Get available NFT providers
   List<NFTProvider> getAvailableNFTProviders() {
-    return _nftProviders.values.where((provider) => provider.isAvailable).toList();
+    return _nftProviders.values
+        .where((provider) => provider.isAvailable)
+        .toList();
   }
 
   /// Get available wallet providers
   List<WalletProvider> getAvailableWalletProviders() {
-    return _walletProviders.values.where((provider) => provider.isAvailable).toList();
+    return _walletProviders.values
+        .where((provider) => provider.isAvailable)
+        .toList();
   }
 
   /// Get available marketplace providers
   List<MarketplaceProvider> getAvailableMarketplaceProviders() {
-    return _marketplaceProviders.values.where((provider) => provider.isAvailable).toList();
+    return _marketplaceProviders.values
+        .where((provider) => provider.isAvailable)
+        .toList();
   }
 
   /// Initialize all providers
@@ -182,11 +189,11 @@ class NFTProviderManager {
   /// Get supported networks
   Set<BlockchainNetwork> getSupportedNetworks() {
     final networks = <BlockchainNetwork>{};
-    
+
     for (final provider in _nftProviders.values) {
       networks.add(provider.network);
     }
-    
+
     return networks;
   }
 

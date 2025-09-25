@@ -1,5 +1,4 @@
-import '../models/nft_listing.dart';
-import '../models/nft_offer.dart';
+import 'package:flutter_yuku/flutter_yuku.dart';
 import '../core/nft_types.dart';
 
 /// Abstract interface for NFT marketplace operations
