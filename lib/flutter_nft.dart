@@ -3,25 +3,13 @@
 /// This library provides a unified interface for working with NFTs across
 /// different blockchain networks through pluggable providers.
 
-// Core exports
-export 'src/core/nft_client.dart';
-export 'src/core/nft_exceptions.dart';
-export 'src/core/nft_types.dart';
+// Re-export flutter_yuku core functionality
+export 'package:flutter_yuku/flutter_yuku.dart';
 
-// Models
-export 'src/models/nft.dart';
-export 'src/models/nft_metadata.dart';
-export 'src/models/nft_listing.dart';
-export 'src/models/nft_offer.dart';
-export 'src/models/transaction.dart';
-
-// Interfaces
-export 'src/interfaces/nft_provider.dart';
-export 'src/interfaces/wallet_provider.dart';
-export 'src/interfaces/marketplace_provider.dart';
-
-// Providers
+// NFT-specific providers
 export 'src/providers/nft_provider_manager.dart';
-
-// Utils
-export 'src/utils/nft_utils.dart';
+export 'src/providers/ethereum_nft_provider.dart';
+export 'src/providers/ethereum_wallet_provider.dart';
+export 'src/providers/opensea_marketplace_provider.dart';
+export 'src/providers/polygon_nft_provider.dart';
+export 'src/providers/solana_nft_provider.dart';

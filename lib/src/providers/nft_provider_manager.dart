@@ -1,7 +1,5 @@
 import 'dart:async';
-import '../interfaces/nft_provider.dart';
-import '../interfaces/wallet_provider.dart';
-import '../interfaces/marketplace_provider.dart';
+import 'package:flutter_yuku/flutter_yuku.dart';
 import '../core/nft_exceptions.dart';
 import '../core/nft_types.dart';
 

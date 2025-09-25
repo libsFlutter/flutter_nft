@@ -3,18 +3,22 @@ import 'package:flutter_nft/flutter_nft.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Create NFT client
   final nftClient = NFTClient();
-  
-  // Note: In a real app, you would register providers here
-  // nftClient.registerNFTProvider(YourNFTProvider());
-  // nftClient.registerWalletProvider(YourWalletProvider());
-  // nftClient.registerMarketplaceProvider(YourMarketplaceProvider());
-  
+
+  // Register real providers
+  nftClient.registerNFTProvider(EthereumNFTProvider());
+  nftClient.registerNFTProvider(PolygonNFTProvider());
+  nftClient.registerNFTProvider(SolanaNFTProvider());
+
+  nftClient.registerWalletProvider(EthereumWalletProvider());
+
+  nftClient.registerMarketplaceProvider(OpenSeaMarketplaceProvider());
+
   // Initialize all providers
   await nftClient.initialize();
-  
+
   runApp(MyApp(nftClient: nftClient));
 }
 
@@ -66,7 +70,7 @@ class _NFTExampleScreenState extends State<NFTExampleScreen> {
     try {
       final networks = widget.nftClient.getSupportedNetworks();
       final stats = widget.nftClient.getProviderStats();
-      
+
       setState(() {
         supportedNetworks = networks.toList();
         providerStats = stats;
@@ -114,9 +118,9 @@ class _NFTExampleScreenState extends State<NFTExampleScreen> {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Provider Stats
             Card(
               child: Padding(
@@ -130,18 +134,21 @@ class _NFTExampleScreenState extends State<NFTExampleScreen> {
                     ),
                     const SizedBox(height: 8),
                     if (providerStats.isNotEmpty) ...[
-                      _buildStatItem('NFT Providers', providerStats['nftProviders']?['total'] ?? 0),
-                      _buildStatItem('Wallet Providers', providerStats['walletProviders']?['total'] ?? 0),
-                      _buildStatItem('Marketplace Providers', providerStats['marketplaceProviders']?['total'] ?? 0),
+                      _buildStatItem('NFT Providers',
+                          providerStats['nftProviders']?['total'] ?? 0),
+                      _buildStatItem('Wallet Providers',
+                          providerStats['walletProviders']?['total'] ?? 0),
+                      _buildStatItem('Marketplace Providers',
+                          providerStats['marketplaceProviders']?['total'] ?? 0),
                     ] else
                       const Text('No providers registered'),
                   ],
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Supported Networks
             Card(
               child: Padding(
@@ -155,10 +162,11 @@ class _NFTExampleScreenState extends State<NFTExampleScreen> {
                     ),
                     const SizedBox(height: 8),
                     if (supportedNetworks.isNotEmpty) ...[
-                      ...supportedNetworks.map((network) => 
-                        Chip(
+                      ...supportedNetworks.map(
+                        (network) => Chip(
                           label: Text(network.name),
-                          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primaryContainer,
                         ),
                       ),
                     ] else
@@ -167,9 +175,9 @@ class _NFTExampleScreenState extends State<NFTExampleScreen> {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Error Display
             if (error != null)
               Card(
@@ -182,13 +190,12 @@ class _NFTExampleScreenState extends State<NFTExampleScreen> {
                   ),
                 ),
               ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Loading Indicator
-            if (isLoading)
-              const Center(child: CircularProgressIndicator()),
-            
+            if (isLoading) const Center(child: CircularProgressIndicator()),
+
             // Content
             if (!isLoading) ...[
               // Architecture Overview
@@ -208,25 +215,28 @@ class _NFTExampleScreenState extends State<NFTExampleScreen> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
-                      const Text('• NFTProvider - Blockchain-specific NFT operations'),
+                      const Text(
+                          '• NFTProvider - Blockchain-specific NFT operations'),
                       const Text('• WalletProvider - Wallet connectivity'),
-                      const Text('• MarketplaceProvider - Marketplace operations'),
+                      const Text(
+                          '• MarketplaceProvider - Marketplace operations'),
                       const SizedBox(height: 16),
                       const Text(
                         'To add support for a new blockchain:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8),
-                      const Text('1. Implement the required provider interfaces'),
+                      const Text(
+                          '1. Implement the required provider interfaces'),
                       const Text('2. Register providers with NFTClient'),
                       const Text('3. Initialize the client'),
                     ],
                   ),
                 ),
               ),
-              
+
               const SizedBox(height: 16),
-              
+
               // Example Code
               Card(
                 child: Padding(
@@ -269,9 +279,9 @@ final nfts = await nftProvider.getNFTsByOwner(address);
                   ),
                 ),
               ),
-              
+
               const SizedBox(height: 16),
-              
+
               // Available Providers
               Card(
                 child: Padding(
@@ -284,8 +294,10 @@ final nfts = await nftProvider.getNFTsByOwner(address);
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       const SizedBox(height: 8),
-                      const Text('• flutter_icp - Internet Computer Protocol support'),
-                      const Text('• Your custom provider - Add your blockchain here'),
+                      const Text(
+                          '• flutter_icp - Internet Computer Protocol support'),
+                      const Text(
+                          '• Your custom provider - Add your blockchain here'),
                       const SizedBox(height: 16),
                       ElevatedButton(
                         onPressed: _loadProviderInfo,
