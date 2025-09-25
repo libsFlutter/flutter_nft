@@ -63,32 +63,35 @@ class NFTProviderManager {
 
   /// Get NFT provider by network
   NFTProvider? getNFTProviderByNetwork(BlockchainNetwork network) {
-    return _nftProviders.values.firstWhere(
-      (provider) => provider.network == network,
-      orElse: () => throw NFTProviderNotAvailableException(
-        'No NFT provider found for network: ${network.name}',
-      ),
-    );
+    try {
+      return _nftProviders.values.firstWhere(
+        (provider) => provider.network == network,
+      );
+    } catch (e) {
+      return null;
+    }
   }
 
   /// Get wallet provider by network
   WalletProvider? getWalletProviderByNetwork(BlockchainNetwork network) {
-    return _walletProviders.values.firstWhere(
-      (provider) => provider.network == network,
-      orElse: () => throw NFTProviderNotAvailableException(
-        'No wallet provider found for network: ${network.name}',
-      ),
-    );
+    try {
+      return _walletProviders.values.firstWhere(
+        (provider) => provider.network == network,
+      );
+    } catch (e) {
+      return null;
+    }
   }
 
   /// Get marketplace provider by network
   MarketplaceProvider? getMarketplaceProviderByNetwork(BlockchainNetwork network) {
-    return _marketplaceProviders.values.firstWhere(
-      (provider) => provider.network == network,
-      orElse: () => throw NFTProviderNotAvailableException(
-        'No marketplace provider found for network: ${network.name}',
-      ),
-    );
+    try {
+      return _marketplaceProviders.values.firstWhere(
+        (provider) => provider.network == network,
+      );
+    } catch (e) {
+      return null;
+    }
   }
 
   /// Get all registered NFT providers

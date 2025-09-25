@@ -284,10 +284,12 @@ class NFTUtils {
   static bool isValidMetadata(Map<String, dynamic> metadata) {
     // Check required fields
     if (!metadata.containsKey('name') || metadata['name'] == null) return false;
-    if (!metadata.containsKey('description') || metadata['description'] == null)
+    if (!metadata.containsKey('description') || metadata['description'] == null) {
       return false;
-    if (!metadata.containsKey('image') || metadata['image'] == null)
+    }
+    if (!metadata.containsKey('image') || metadata['image'] == null) {
       return false;
+    }
 
     // Validate types
     if (metadata['name'] is! String) return false;
