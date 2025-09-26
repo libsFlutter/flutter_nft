@@ -342,7 +342,7 @@ class PolygonNFTProvider implements NFTProvider {
         'value': transaction?.value?.toString(),
         'gas': transaction?.gas?.toString(),
         'gasPrice': transaction?.gasPrice?.toString(),
-        'status': receipt?.status == 1 ? 'success' : 'failed',
+        'status': (receipt?.status == 1) ? 'success' : 'failed',
         'blockNumber': receipt?.blockNumber?.toString(),
         'blockHash': receipt?.blockHash?.hex,
         'network': 'polygon',
@@ -577,7 +577,7 @@ class PolygonNFTProvider implements NFTProvider {
 
       // Handle IPFS URIs
       if (uri.startsWith('ipfs://')) {
-        metadataUri = uri.replaceFirst('ipfs://', '$_ipfsGateway');
+        metadataUri = uri.replaceFirst('ipfs://', _ipfsGateway);
       }
 
       final response = await http.get(Uri.parse(metadataUri));
