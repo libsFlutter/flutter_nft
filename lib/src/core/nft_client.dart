@@ -1,4 +1,4 @@
-import 'package:flutter_yuku/flutter_yuku.dart';
+import 'package:flutter_yuku/flutter_yuku.dart' as yuku;
 import '../interfaces/wallet_provider.dart';
 import '../interfaces/marketplace_provider.dart';
 import '../providers/nft_provider_manager.dart';
@@ -38,7 +38,7 @@ class NFTClient {
   }
 
   /// Get NFT provider for a specific network
-  NFTProvider? getNFTProvider(dynamic network) {
+  yuku.NFTProvider? getNFTProvider(dynamic network) {
     final blockchainNetwork = network is BlockchainNetwork
         ? network
         : BlockchainNetwork.ethereum;
@@ -105,7 +105,7 @@ class NFTClient {
   }
 
   /// Register an NFT provider
-  void registerNFTProvider(NFTProvider provider) {
+  void registerNFTProvider(yuku.NFTProvider provider) {
     _providerManager.registerNFTProvider(provider);
   }
 
@@ -135,7 +135,7 @@ class NFTClient {
   }
 
   /// Get all available NFT providers
-  List<NFTProvider> getAvailableNFTProviders() {
+  List<yuku.NFTProvider> getAvailableNFTProviders() {
     return _providerManager.getAvailableNFTProviders();
   }
 

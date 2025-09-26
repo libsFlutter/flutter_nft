@@ -317,7 +317,7 @@ class PolygonNFTProvider implements NFTProvider {
         return TransactionStatus.pending;
       }
 
-      return receipt.status == 1
+      return (receipt.status == 1)
           ? TransactionStatus.confirmed
           : TransactionStatus.failed;
     } catch (e) {
