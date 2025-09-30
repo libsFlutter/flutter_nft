@@ -13,3 +13,5 @@ export 'src/providers/ethereum_wallet_provider.dart';
 export 'src/providers/opensea_marketplace_provider.dart';
 export 'src/providers/polygon_nft_provider.dart';
 export 'src/providers/solana_nft_provider.dart';
+export 'src/providers/bsc_nft_provider.dart';
+export 'src/providers/avalanche_nft_provider.dart';

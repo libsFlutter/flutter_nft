@@ -16,12 +16,12 @@ class MockNFTProvider implements NFTProvider {
     BlockchainNetwork? network,
     bool isAvailable = true,
     bool shouldThrowError = false,
-  })  : _id = id ?? 'mock-nft-provider',
-        _name = name ?? 'Mock NFT Provider',
-        _version = version ?? '1.0.0',
-        _network = network ?? BlockchainNetwork.ethereum,
-        _isAvailable = isAvailable,
-        _shouldThrowError = shouldThrowError;
+  }) : _id = id ?? 'mock-nft-provider',
+       _name = name ?? 'Mock NFT Provider',
+       _version = version ?? '1.0.0',
+       _network = network ?? BlockchainNetwork.ethereum,
+       _isAvailable = isAvailable,
+       _shouldThrowError = shouldThrowError;
 
   @override
   String get id => _id;
@@ -60,9 +60,9 @@ class MockNFTProvider implements NFTProvider {
       NFT(
         id: 'nft-1',
         tokenId: '1',
-        contractAddress: '0x123',
+        contractAddress: '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a',
         owner: ownerAddress,
-        creator: '0x789',
+        creator: '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a',
         network: _network,
         metadata: NFTMetadata(
           name: 'Mock NFT 1',
@@ -88,7 +88,7 @@ class MockNFTProvider implements NFTProvider {
       id: 'nft-$tokenId',
       tokenId: tokenId,
       contractAddress: contractAddress,
-      owner: '0x456',
+      owner: '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a',
       creator: '0x789',
       network: _network,
       metadata: NFTMetadata(
@@ -107,30 +107,34 @@ class MockNFTProvider implements NFTProvider {
 
   @override
   Future<List<NFT>> getNFTs(
-      List<String> tokenIds, String contractAddress) async {
+    List<String> tokenIds,
+    String contractAddress,
+  ) async {
     if (_shouldThrowError) {
       throw NFTProviderNotAvailableException('Mock error');
     }
     return tokenIds
-        .map((id) => NFT(
-              id: 'nft-$id',
-              tokenId: id,
-              contractAddress: contractAddress,
-              owner: '0x456',
-              creator: '0x789',
-              network: _network,
-              metadata: NFTMetadata(
-                name: 'Mock NFT $id',
-                description: 'A mock NFT for testing',
-                image: 'https://example.com/image.png',
-                attributes: {'rarity': 'common'},
-                properties: {'type': 'digital'},
-              ),
-              createdAt: DateTime.now(),
-              updatedAt: DateTime.now(),
-              status: 'active',
-              transactionHistory: ['tx1'],
-            ))
+        .map(
+          (id) => NFT(
+            id: 'nft-$id',
+            tokenId: id,
+            contractAddress: contractAddress,
+            owner: '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a',
+            creator: '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a',
+            network: _network,
+            metadata: NFTMetadata(
+              name: 'Mock NFT $id',
+              description: 'A mock NFT for testing',
+              image: 'https://example.com/image.png',
+              attributes: {'rarity': 'common'},
+              properties: {'type': 'digital'},
+            ),
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+            status: 'active',
+            transactionHistory: ['tx1'],
+          ),
+        )
         .toList();
   }
 
@@ -257,7 +261,8 @@ class MockNFTProvider implements NFTProvider {
 
   @override
   Future<Map<String, dynamic>> getTransactionDetails(
-      String transactionHash) async {
+    String transactionHash,
+  ) async {
     if (_shouldThrowError) {
       throw NFTProviderNotAvailableException('Mock error');
     }
@@ -284,9 +289,10 @@ class MockNFTProvider implements NFTProvider {
       NFT(
         id: 'search-result-1',
         tokenId: 'search-result-1',
-        contractAddress: contractAddress ?? '0x123',
-        owner: '0x789',
-        creator: '0x456',
+        contractAddress:
+            contractAddress ?? '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a',
+        owner: '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a',
+        creator: '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a',
         network: _network,
         metadata: NFTMetadata(
           name: name ?? 'Search Result NFT',

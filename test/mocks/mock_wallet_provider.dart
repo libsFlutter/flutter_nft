@@ -20,14 +20,14 @@ class MockWalletProvider implements WalletProvider {
     bool isConnected = false,
     String? connectedAddress,
     bool shouldThrowError = false,
-  })  : _id = id ?? 'mock-wallet-provider',
-        _name = name ?? 'Mock Wallet Provider',
-        _version = version ?? '1.0.0',
-        _network = network ?? BlockchainNetwork.ethereum,
-        _isAvailable = isAvailable,
-        _isConnected = isConnected,
-        _connectedAddress = connectedAddress,
-        _shouldThrowError = shouldThrowError;
+  }) : _id = id ?? 'mock-wallet-provider',
+       _name = name ?? 'Mock Wallet Provider',
+       _version = version ?? '1.0.0',
+       _network = network ?? BlockchainNetwork.ethereum,
+       _isAvailable = isAvailable,
+       _isConnected = isConnected,
+       _connectedAddress = connectedAddress,
+       _shouldThrowError = shouldThrowError;
 
   @override
   String get id => _id;
@@ -84,7 +84,7 @@ class MockWalletProvider implements WalletProvider {
     if (_shouldThrowError) {
       throw WalletNotConnectedException('Mock address error');
     }
-    return _connectedAddress ?? '0x1234567890123456789012345678901234567890';
+    return _connectedAddress ?? '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a';
   }
 
   @override
@@ -159,7 +159,8 @@ class MockWalletProvider implements WalletProvider {
 
   @override
   Future<Map<String, dynamic>> getTransactionDetails(
-      String transactionHash) async {
+    String transactionHash,
+  ) async {
     if (_shouldThrowError) {
       throw WalletNotConnectedException('Mock details error');
     }

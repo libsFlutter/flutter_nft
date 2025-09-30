@@ -4,10 +4,9 @@ import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart';
 import 'package:flutter_yuku/flutter_yuku.dart';
-import '../utils/nft_utils.dart';
 
-/// Real Ethereum NFT Provider implementation
-class EthereumNFTProvider implements NFTProvider {
+/// Real Avalanche NFT Provider implementation
+class AvalancheNFTProvider implements NFTProvider {
   final String _id;
   final String _name;
   final String _version;
@@ -17,18 +16,18 @@ class EthereumNFTProvider implements NFTProvider {
   final Web3Client? _client;
   final bool _isAvailable;
 
-  EthereumNFTProvider({
+  AvalancheNFTProvider({
     String? id,
     String? name,
     String? version,
     String? rpcUrl,
     String? ipfsGateway,
     Web3Client? client,
-  }) : _id = id ?? 'ethereum-nft-provider',
-       _name = name ?? 'Ethereum NFT Provider',
+  }) : _id = id ?? 'avalanche-nft-provider',
+       _name = name ?? 'Avalanche NFT Provider',
        _version = version ?? '1.0.0',
-       _network = BlockchainNetwork.ethereum,
-       _rpcUrl = rpcUrl ?? 'https://mainnet.infura.io/v3/YOUR_PROJECT_ID',
+       _network = BlockchainNetwork.avalanche,
+       _rpcUrl = rpcUrl ?? 'https://api.avax.network/ext/bc/C/rpc',
        _ipfsGateway = ipfsGateway ?? 'https://ipfs.io/ipfs/',
        _client = client,
        _isAvailable = true;
@@ -260,18 +259,32 @@ class EthereumNFTProvider implements NFTProvider {
   List<SupportedCurrency> getSupportedCurrencies() {
     return [
       const SupportedCurrency(
-        symbol: 'ETH',
-        name: 'Ethereum',
+        symbol: 'AVAX',
+        name: 'Avalanche',
         contractAddress: '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a',
         decimals: 18,
-        network: BlockchainNetwork.ethereum,
+        network: BlockchainNetwork.avalanche,
       ),
       const SupportedCurrency(
-        symbol: 'WETH',
-        name: 'Wrapped Ethereum',
-        contractAddress: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+        symbol: 'WAVAX',
+        name: 'Wrapped AVAX',
+        contractAddress: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
         decimals: 18,
-        network: BlockchainNetwork.ethereum,
+        network: BlockchainNetwork.avalanche,
+      ),
+      const SupportedCurrency(
+        symbol: 'USDC',
+        name: 'USD Coin',
+        contractAddress: '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664',
+        decimals: 6,
+        network: BlockchainNetwork.avalanche,
+      ),
+      const SupportedCurrency(
+        symbol: 'USDT',
+        name: 'Tether USD',
+        contractAddress: '0xc7198437980c041c805A1EDcbA50c1Ce5db95118',
+        decimals: 6,
+        network: BlockchainNetwork.avalanche,
       ),
     ];
   }
@@ -285,7 +298,8 @@ class EthereumNFTProvider implements NFTProvider {
       final gasPrice = await client.getGasPrice();
       final gasLimit = _getGasLimitForOperation(operation);
 
-      return (gasPrice * gasLimit).toDouble() / 1e18; // Convert wei to ETH
+      // Avalanche has lower gas fees than Ethereum
+      return (gasPrice * gasLimit).toDouble() / 1e18; // Convert wei to AVAX
     } catch (e) {
       throw ProviderException('Failed to estimate transaction fee: $e');
     }
@@ -300,7 +314,7 @@ class EthereumNFTProvider implements NFTProvider {
         return TransactionStatus.pending;
       }
 
-      return receipt.status == 1
+      return (receipt.status == 1)
           ? TransactionStatus.confirmed
           : TransactionStatus.failed;
     } catch (e) {
@@ -323,9 +337,10 @@ class EthereumNFTProvider implements NFTProvider {
         'value': transaction?.value?.toString(),
         'gas': transaction?.gas?.toString(),
         'gasPrice': transaction?.gasPrice?.toString(),
-        'status': receipt?.status == 1 ? 'success' : 'failed',
+        'status': (receipt?.status == 1) ? 'success' : 'failed',
         'blockNumber': receipt?.blockNumber?.toString(),
         'blockHash': receipt?.blockHash?.hex,
+        'network': 'avalanche',
       };
     } catch (e) {
       throw ProviderException('Failed to get transaction details: $e');
@@ -360,6 +375,7 @@ class EthereumNFTProvider implements NFTProvider {
         'totalSupply': totalSupply.toString(),
         'contractAddress': contractAddress,
         'network': _network.toString(),
+        'chainId': 43114, // Avalanche C-Chain mainnet chain ID
       };
     } catch (e) {
       throw ProviderException('Failed to get contract info: $e');
@@ -387,7 +403,7 @@ class EthereumNFTProvider implements NFTProvider {
   // Private helper methods
 
   Future<DeployedContract> _getERC721Contract([String? contractAddress]) async {
-    // ERC-721 ABI (simplified)
+    // ERC-721 ABI (same as Ethereum)
     final abi = jsonEncode([
       {
         "inputs": [
@@ -554,7 +570,7 @@ class EthereumNFTProvider implements NFTProvider {
 
       // Handle IPFS URIs
       if (uri.startsWith('ipfs://')) {
-        metadataUri = uri.replaceFirst('ipfs://', '$_ipfsGateway');
+        metadataUri = uri.replaceFirst('ipfs://', _ipfsGateway);
       }
 
       final response = await http.get(Uri.parse(metadataUri));

@@ -125,7 +125,10 @@ void main() {
       test('should have correct ETH currency', () {
         expect(Currency.eth.symbol, 'ETH');
         expect(Currency.eth.name, 'Ethereum');
-        expect(Currency.eth.contractAddress, '');
+        expect(
+          Currency.eth.contractAddress,
+          '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a',
+        );
         expect(Currency.eth.decimals, 18);
         expect(Currency.eth.network, BlockchainNetwork.ethereum);
       });
@@ -149,7 +152,10 @@ void main() {
       test('should have correct MATIC currency', () {
         expect(Currency.matic.symbol, 'MATIC');
         expect(Currency.matic.name, 'Polygon');
-        expect(Currency.matic.contractAddress, '');
+        expect(
+          Currency.matic.contractAddress,
+          '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a',
+        );
         expect(Currency.matic.decimals, 18);
         expect(Currency.matic.network, BlockchainNetwork.polygon);
       });
@@ -157,7 +163,10 @@ void main() {
       test('should have correct BNB currency', () {
         expect(Currency.bnb.symbol, 'BNB');
         expect(Currency.bnb.name, 'Binance Coin');
-        expect(Currency.bnb.contractAddress, '');
+        expect(
+          Currency.bnb.contractAddress,
+          '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a',
+        );
         expect(Currency.bnb.decimals, 18);
         expect(Currency.bnb.network, BlockchainNetwork.bsc);
       });

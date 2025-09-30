@@ -4,8 +4,6 @@ import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart';
 import 'package:flutter_yuku/flutter_yuku.dart';
-import '../core/nft_types.dart';
-import '../core/nft_exceptions.dart';
 import '../utils/nft_utils.dart';
 
 /// Real Polygon NFT Provider implementation
@@ -97,7 +95,7 @@ class PolygonNFTProvider implements NFTProvider {
 
       return nfts;
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to get NFTs by owner: $e');
+      throw ProviderException('Failed to get NFTs by owner: $e');
     }
   }
 
@@ -106,7 +104,7 @@ class PolygonNFTProvider implements NFTProvider {
     try {
       return await _getNFTByTokenId(tokenId, contractAddress);
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to get NFT: $e');
+      throw ProviderException('Failed to get NFT: $e');
     }
   }
 
@@ -125,7 +123,7 @@ class PolygonNFTProvider implements NFTProvider {
       }
       return nfts;
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to get NFTs: $e');
+      throw ProviderException('Failed to get NFTs: $e');
     }
   }
 
@@ -147,7 +145,7 @@ class PolygonNFTProvider implements NFTProvider {
 
       return transaction.hash;
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to mint NFT: $e');
+      throw ProviderException('Failed to mint NFT: $e');
     }
   }
 
@@ -169,7 +167,7 @@ class PolygonNFTProvider implements NFTProvider {
 
       return transaction.hash;
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to transfer NFT: $e');
+      throw ProviderException('Failed to transfer NFT: $e');
     }
   }
 
@@ -186,7 +184,7 @@ class PolygonNFTProvider implements NFTProvider {
 
       return transaction.hash;
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to burn NFT: $e');
+      throw ProviderException('Failed to burn NFT: $e');
     }
   }
 
@@ -207,7 +205,7 @@ class PolygonNFTProvider implements NFTProvider {
 
       return transaction.hash;
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to approve NFT: $e');
+      throw ProviderException('Failed to approve NFT: $e');
     }
   }
 
@@ -227,7 +225,7 @@ class PolygonNFTProvider implements NFTProvider {
       return approvedAddressResult.hex ==
           EthereumAddress.fromHex(approvedAddress).hex;
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to check approval: $e');
+      throw ProviderException('Failed to check approval: $e');
     }
   }
 
@@ -242,7 +240,7 @@ class PolygonNFTProvider implements NFTProvider {
 
       return await _fetchMetadataFromUri(tokenUri);
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to get NFT metadata: $e');
+      throw ProviderException('Failed to get NFT metadata: $e');
     }
   }
 
@@ -255,37 +253,39 @@ class PolygonNFTProvider implements NFTProvider {
   }) async {
     // ERC-721 doesn't support metadata updates by default
     // This would require a custom contract implementation
-    throw NFTProviderNotAvailableException(
-      'Metadata updates not supported for ERC-721',
-    );
+    throw ProviderException('Metadata updates not supported for ERC-721');
   }
 
   @override
   List<SupportedCurrency> getSupportedCurrencies() {
     return [
-      SupportedCurrency(
+      const SupportedCurrency(
         symbol: 'MATIC',
         name: 'Polygon',
+        contractAddress: '0xffcba0b4980eb2d2336bfdb1e5a0fc49c620908a',
         decimals: 18,
-        contractAddress: null,
+        network: BlockchainNetwork.polygon,
       ),
-      SupportedCurrency(
+      const SupportedCurrency(
         symbol: 'WMATIC',
         name: 'Wrapped Polygon',
-        decimals: 18,
         contractAddress: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
+        decimals: 18,
+        network: BlockchainNetwork.polygon,
       ),
-      SupportedCurrency(
+      const SupportedCurrency(
         symbol: 'USDC',
         name: 'USD Coin',
-        decimals: 6,
         contractAddress: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
+        decimals: 6,
+        network: BlockchainNetwork.polygon,
       ),
-      SupportedCurrency(
+      const SupportedCurrency(
         symbol: 'USDT',
         name: 'Tether USD',
-        decimals: 6,
         contractAddress: '0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
+        decimals: 6,
+        network: BlockchainNetwork.polygon,
       ),
     ];
   }
@@ -302,9 +302,7 @@ class PolygonNFTProvider implements NFTProvider {
       // Polygon has lower gas fees than Ethereum
       return (gasPrice * gasLimit).toDouble() / 1e18; // Convert wei to MATIC
     } catch (e) {
-      throw NFTProviderNotAvailableException(
-        'Failed to estimate transaction fee: $e',
-      );
+      throw ProviderException('Failed to estimate transaction fee: $e');
     }
   }
 
@@ -321,9 +319,7 @@ class PolygonNFTProvider implements NFTProvider {
           ? TransactionStatus.confirmed
           : TransactionStatus.failed;
     } catch (e) {
-      throw NFTProviderNotAvailableException(
-        'Failed to get transaction status: $e',
-      );
+      throw ProviderException('Failed to get transaction status: $e');
     }
   }
 
@@ -348,9 +344,7 @@ class PolygonNFTProvider implements NFTProvider {
         'network': 'polygon',
       };
     } catch (e) {
-      throw NFTProviderNotAvailableException(
-        'Failed to get transaction details: $e',
-      );
+      throw ProviderException('Failed to get transaction details: $e');
     }
   }
 
@@ -385,7 +379,7 @@ class PolygonNFTProvider implements NFTProvider {
         'chainId': 137, // Polygon mainnet chain ID
       };
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to get contract info: $e');
+      throw ProviderException('Failed to get contract info: $e');
     }
   }
 

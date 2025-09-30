@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_yuku/flutter_yuku.dart';
-import '../core/nft_exceptions.dart';
 
 /// Real Solana NFT Provider implementation
 class SolanaNFTProvider implements NFTProvider {
@@ -85,7 +84,7 @@ class SolanaNFTProvider implements NFTProvider {
         return [];
       }
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to get NFTs by owner: $e');
+      throw ProviderException('Failed to get NFTs by owner: $e');
     }
   }
 
@@ -94,7 +93,7 @@ class SolanaNFTProvider implements NFTProvider {
     try {
       return await _getNFTByMint(tokenId);
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to get NFT: $e');
+      throw ProviderException('Failed to get NFT: $e');
     }
   }
 
@@ -113,7 +112,7 @@ class SolanaNFTProvider implements NFTProvider {
       }
       return nfts;
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to get NFTs: $e');
+      throw ProviderException('Failed to get NFTs: $e');
     }
   }
 
@@ -127,11 +126,9 @@ class SolanaNFTProvider implements NFTProvider {
     try {
       // Solana NFT minting requires complex transaction building
       // This would need integration with Solana SDK
-      throw NFTProviderNotAvailableException(
-        'NFT minting requires Solana SDK integration',
-      );
+      throw ProviderException('NFT minting requires Solana SDK integration');
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to mint NFT: $e');
+      throw ProviderException('Failed to mint NFT: $e');
     }
   }
 
@@ -146,11 +143,9 @@ class SolanaNFTProvider implements NFTProvider {
     try {
       // Solana NFT transfer requires complex transaction building
       // This would need integration with Solana SDK
-      throw NFTProviderNotAvailableException(
-        'NFT transfer requires Solana SDK integration',
-      );
+      throw ProviderException('NFT transfer requires Solana SDK integration');
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to transfer NFT: $e');
+      throw ProviderException('Failed to transfer NFT: $e');
     }
   }
 
@@ -164,11 +159,9 @@ class SolanaNFTProvider implements NFTProvider {
     try {
       // Solana NFT burning requires complex transaction building
       // This would need integration with Solana SDK
-      throw NFTProviderNotAvailableException(
-        'NFT burning requires Solana SDK integration',
-      );
+      throw ProviderException('NFT burning requires Solana SDK integration');
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to burn NFT: $e');
+      throw ProviderException('Failed to burn NFT: $e');
     }
   }
 
@@ -182,11 +175,9 @@ class SolanaNFTProvider implements NFTProvider {
   }) async {
     try {
       // Solana doesn't have approval mechanism like Ethereum
-      throw NFTProviderNotAvailableException(
-        'Approval not supported on Solana',
-      );
+      throw ProviderException('Approval not supported on Solana');
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to approve NFT: $e');
+      throw ProviderException('Failed to approve NFT: $e');
     }
   }
 
@@ -210,7 +201,7 @@ class SolanaNFTProvider implements NFTProvider {
       final metadata = await _getMetadataFromMint(tokenId);
       return metadata;
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to get NFT metadata: $e');
+      throw ProviderException('Failed to get NFT metadata: $e');
     }
   }
 
@@ -224,36 +215,37 @@ class SolanaNFTProvider implements NFTProvider {
     try {
       // Solana metadata updates require complex transaction building
       // This would need integration with Solana SDK
-      throw NFTProviderNotAvailableException(
+      throw ProviderException(
         'Metadata updates require Solana SDK integration',
       );
     } catch (e) {
-      throw NFTProviderNotAvailableException(
-        'Failed to update NFT metadata: $e',
-      );
+      throw ProviderException('Failed to update NFT metadata: $e');
     }
   }
 
   @override
   List<SupportedCurrency> getSupportedCurrencies() {
     return [
-      SupportedCurrency(
+      const SupportedCurrency(
         symbol: 'SOL',
         name: 'Solana',
+        contractAddress: '',
         decimals: 9,
-        contractAddress: null,
+        network: BlockchainNetwork.solana,
       ),
-      SupportedCurrency(
+      const SupportedCurrency(
         symbol: 'USDC',
         name: 'USD Coin',
-        decimals: 6,
         contractAddress: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+        decimals: 6,
+        network: BlockchainNetwork.solana,
       ),
-      SupportedCurrency(
+      const SupportedCurrency(
         symbol: 'USDT',
         name: 'Tether USD',
-        decimals: 6,
         contractAddress: 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB',
+        decimals: 6,
+        network: BlockchainNetwork.solana,
       ),
     ];
   }
@@ -267,9 +259,7 @@ class SolanaNFTProvider implements NFTProvider {
       // Solana has very low transaction fees (around 0.000005 SOL)
       return 0.000005;
     } catch (e) {
-      throw NFTProviderNotAvailableException(
-        'Failed to estimate transaction fee: $e',
-      );
+      throw ProviderException('Failed to estimate transaction fee: $e');
     }
   }
 
@@ -293,9 +283,7 @@ class SolanaNFTProvider implements NFTProvider {
 
       return TransactionStatus.pending;
     } catch (e) {
-      throw NFTProviderNotAvailableException(
-        'Failed to get transaction status: $e',
-      );
+      throw ProviderException('Failed to get transaction status: $e');
     }
   }
 
@@ -323,9 +311,7 @@ class SolanaNFTProvider implements NFTProvider {
         throw Exception('Transaction not found');
       }
     } catch (e) {
-      throw NFTProviderNotAvailableException(
-        'Failed to get transaction details: $e',
-      );
+      throw ProviderException('Failed to get transaction details: $e');
     }
   }
 
@@ -354,7 +340,7 @@ class SolanaNFTProvider implements NFTProvider {
         'chainId': 101, // Solana mainnet
       };
     } catch (e) {
-      throw NFTProviderNotAvailableException('Failed to get contract info: $e');
+      throw ProviderException('Failed to get contract info: $e');
     }
   }
 
