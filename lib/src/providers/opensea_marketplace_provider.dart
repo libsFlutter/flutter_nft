@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_yuku/flutter_yuku.dart';
-import '../core/nft_types.dart';
-import '../core/nft_exceptions.dart';
 
 /// Real OpenSea Marketplace Provider implementation
 class OpenSeaMarketplaceProvider implements MarketplaceProvider {
@@ -20,13 +18,13 @@ class OpenSeaMarketplaceProvider implements MarketplaceProvider {
     String? version,
     String? apiKey,
     String? baseUrl,
-  }) : _id = id ?? 'opensea-marketplace-provider',
-       _name = name ?? 'OpenSea Marketplace Provider',
-       _version = version ?? '1.0.0',
-       _network = BlockchainNetwork.ethereum,
-       _apiKey = apiKey ?? '',
-       _baseUrl = baseUrl ?? 'https://api.opensea.io/api/v1',
-       _isAvailable = true;
+  })  : _id = id ?? 'opensea-marketplace-provider',
+        _name = name ?? 'OpenSea Marketplace Provider',
+        _version = version ?? '1.0.0',
+        _network = BlockchainNetwork.ethereum,
+        _apiKey = apiKey ?? '',
+        _baseUrl = baseUrl ?? 'https://api.opensea.io/api/v1',
+        _isAvailable = true;
 
   @override
   String get id => _id;

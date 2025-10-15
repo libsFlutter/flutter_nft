@@ -4,8 +4,6 @@ import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_yuku/flutter_yuku.dart';
-import '../core/nft_types.dart';
-import '../core/nft_exceptions.dart';
 
 /// Real Ethereum Wallet Provider implementation
 class EthereumWalletProvider implements WalletProvider {
@@ -28,14 +26,14 @@ class EthereumWalletProvider implements WalletProvider {
     String? rpcUrl,
     Web3Client? client,
     Credentials? credentials,
-  }) : _id = id ?? 'ethereum-wallet-provider',
-       _name = name ?? 'Ethereum Wallet Provider',
-       _version = version ?? '1.0.0',
-       _network = BlockchainNetwork.ethereum,
-       _rpcUrl = rpcUrl ?? 'https://mainnet.infura.io/v3/YOUR_PROJECT_ID',
-       _client = client,
-       _isAvailable = true,
-       _credentials = credentials;
+  })  : _id = id ?? 'ethereum-wallet-provider',
+        _name = name ?? 'Ethereum Wallet Provider',
+        _version = version ?? '1.0.0',
+        _network = BlockchainNetwork.ethereum,
+        _rpcUrl = rpcUrl ?? 'https://mainnet.infura.io/v3/YOUR_PROJECT_ID',
+        _client = client,
+        _isAvailable = true,
+        _credentials = credentials;
 
   @override
   String get id => _id;

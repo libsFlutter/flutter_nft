@@ -2,7 +2,7 @@ import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'dart:math';
 import 'package:http/http.dart' as http;
-import '../core/nft_types.dart';
+import 'package:flutter_yuku/flutter_yuku.dart';
 
 /// Utility functions for NFT operations
 class NFTUtils {
@@ -181,8 +181,7 @@ class NFTUtils {
     required String imageUrl,
     List<String>? traits,
   }) {
-    final randomTraits =
-        traits ??
+    final randomTraits = traits ??
         [
           'Color',
           'Background',

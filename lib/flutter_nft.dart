@@ -6,14 +6,6 @@
 // Re-export flutter_yuku core functionality
 export 'package:flutter_yuku/flutter_yuku.dart';
 
-// Core NFT client
-export 'src/core/nft_client.dart';
-export 'src/core/nft_exceptions.dart';
-
-// NFT Models
-export 'src/models/nft.dart';
-export 'src/models/nft_metadata.dart';
-
 // NFT-specific providers
 export 'src/providers/nft_provider_manager.dart';
 export 'src/providers/ethereum_nft_provider.dart';
@@ -23,3 +15,6 @@ export 'src/providers/polygon_nft_provider.dart';
 export 'src/providers/solana_nft_provider.dart';
 export 'src/providers/bsc_nft_provider.dart';
 export 'src/providers/avalanche_nft_provider.dart';
+
+// NFT utilities
+export 'src/utils/nft_utils.dart';

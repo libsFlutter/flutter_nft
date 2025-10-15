@@ -1,3 +1,13 @@
+## 2.2.1
+
+* Architecture refactoring: Removed code duplication with flutter_yuku
+* Now depends on flutter_yuku ^2.0.3 for base models and interfaces
+* Removed duplicate NFT and NFTMetadata models (now using from flutter_yuku)
+* Removed NFTClient (using YukuClient from flutter_yuku instead)
+* Fixed import structure for better modularity
+* Updated dependency versions for compatibility
+* Improved package organization
+
 ## 1.3.0
 
 * Fixed dependencies for package publishing
